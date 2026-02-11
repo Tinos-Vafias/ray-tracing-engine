@@ -1,0 +1,3 @@
+C:/Users/tinos/ray-tracing-engine/build/CMakeFiles/inOneWeekend.dir
+C:/Users/tinos/ray-tracing-engine/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/tinos/ray-tracing-engine/build/CMakeFiles/ZERO_CHECK.dir

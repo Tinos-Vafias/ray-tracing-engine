@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\tinos\ray-tracing-engine\build\CMakeFiles\8e5dfdf2bf386ccb47349248caf4c9eb\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{61CB63F4-62DF-3488-A7B7-6AB932A310C3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

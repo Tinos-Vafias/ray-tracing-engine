@@ -112,7 +112,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=RayTracing
+CMAKE_PROJECT_NAME:STATIC=RayTracingEngine
 
 //RC compiler
 CMAKE_RC_COMPILER:FILEPATH=rc
@@ -184,6 +184,24 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+//Value Computed by CMake
+RTWeekend_BINARY_DIR:STATIC=C:/Users/tinos/ray-tracing-engine/build
+
+//Value Computed by CMake
+RTWeekend_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+RTWeekend_SOURCE_DIR:STATIC=C:/Users/tinos/ray-tracing-engine
+
+//Value Computed by CMake
+RayTracingEngine_BINARY_DIR:STATIC=C:/Users/tinos/ray-tracing-engine/build
+
+//Value Computed by CMake
+RayTracingEngine_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+RayTracingEngine_SOURCE_DIR:STATIC=C:/Users/tinos/ray-tracing-engine
 
 //Value Computed by CMake
 RayTracing_BINARY_DIR:STATIC=C:/Users/tinos/ray-tracing-engine/build

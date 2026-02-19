@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\tinos\ray-tracing-engine\build\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>C:\Users\zouan\ray-tracing-engine\build\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\tinos\ray-tracing-engine\build\Debug\inOneWeekend.exe</FullPath>
+      <FullPath>C:\Users\zouan\ray-tracing-engine\build\Debug\inOneWeekend.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

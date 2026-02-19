@@ -1,6 +1,6 @@
-^C:\USERS\TINOS\RAY-TRACING-ENGINE\BUILD\CMAKEFILES\8E5DFDF2BF386CCB47349248CAF4C9EB\GENERATE.STAMP.RULE
+^C:\USERS\ZOUAN\RAY-TRACING-ENGINE\BUILD\CMAKEFILES\8F8A2C3AD6F33BFB2D542BC34BD707F1\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tinos/ray-tracing-engine -BC:/Users/tinos/ray-tracing-engine/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/tinos/ray-tracing-engine/build/RayTracingEngine.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/zouan/ray-tracing-engine -BC:/Users/zouan/ray-tracing-engine/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/zouan/ray-tracing-engine/build/RayTracingEngine.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

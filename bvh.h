@@ -10,8 +10,14 @@
 class bvh_node : public hittable {
   public:
     bvh_node(hittable_list list) : bvh_node(list.objects, 0, list.objects.size()) {
-        // Build the bounding box of the span of source objects.
-        bbox = aabb::empty;
+        // There's a C++ subtlety here. This constructor (without span indices) creates an
+        // implicit copy of the hittable list, which we will modify. The lifetime of the copied
+        // list only extends until this constructor exits. That's OK, because we only need to
+        // persist the resulting bounding volume hierarchy.
+    }
+
+    bvh_node(std::vector<shared_ptr<hittable>>& objects, size_t start, size_t end) {
+                bbox = aabb::empty;
         for (size_t object_index=start; object_index < end; object_index++)
             bbox = aabb(bbox, objects[object_index]->bounding_box());
 
@@ -35,11 +41,6 @@ class bvh_node : public hittable {
             left = make_shared<bvh_node>(objects, start, mid);
             right = make_shared<bvh_node>(objects, mid, end);
         }
-
-    }
-
-    bvh_node(std::vector<shared_ptr<hittable>>& objects, size_t start, size_t end) {
-        // To be implemented later.
     }
 
     bool hit(const ray& r, interval ray_t, hit_record& rec) const override {

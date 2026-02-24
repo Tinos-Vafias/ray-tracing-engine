@@ -56,6 +56,19 @@ class vec3 {
     static vec3 random(double min, double max) {
         return vec3(random_double(min,max), random_double(min,max), random_double(min,max));
     }
+
+
+    //fusing
+    vec3 vec3::get_normalized() const {
+	vec3 v = *this;
+	v.normalize();
+	return v;
+    }
+
+    void vec3::normalize() {
+        *this /= length();
+    }
+
 };
 
 // point3 is just an alias for vec3, but useful for geometric clarity in the code.

@@ -7,6 +7,7 @@
 #include <limits>
 #include <memory>
 #include <random>
+#include <chrono>
 
 
 // C++ Std Usings
@@ -42,11 +43,29 @@ inline int random_int(int min, int max) {
     return int(random_double(min, max+1));
 }
 
+struct timer {
+	std::string name;
+	std::chrono::high_resolution_clock::time_point start, end;
+	timer(std::string name) : name(name) {
+		start = std::chrono::high_resolution_clock::now();
+	}
+
+	~timer() {
+		end = std::chrono::high_resolution_clock::now();
+		std::chrono::milliseconds duration =
+			std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+		std::cout << name << " took " << duration.count() / 1000.0 << " seconds" << std::endl;
+	}
+};
+
+
 // Common Headers
 
 #include "color.h"
 #include "interval.h"
 #include "ray.h"
 #include "vec3.h"
+#include "triangle.h"
+#include "aabb.h"
 
 #endif

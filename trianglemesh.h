@@ -59,7 +59,7 @@ class triangle_mesh {
                 index_offset += fv;
             }
         }
-        // comment this to run the ppm file (it won't read with these commented lines)
+        // comment this to run the ppm file (it won't read with these coutput lines)
         std::cout << "> Successfully loaded " << inputfile << " with " << mesh_tris.objects.size() << " triangles.\n";
     }
 

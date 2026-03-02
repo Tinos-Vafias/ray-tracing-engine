@@ -13,3 +13,9 @@ add_executable(inOneWeekend main.cpp tiny_obj_loader.cpp)
 
 # 4. (Optional) Helpful for VS Code to find your headers easily
 target_include_directories(inOneWeekend PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+find_package(OpenMP REQUIRED)
+
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(inOneWeekend PUBLIC OpenMP::OpenMP_CXX)
+endif()

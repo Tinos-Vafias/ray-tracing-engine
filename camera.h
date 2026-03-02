@@ -3,6 +3,10 @@
 
 #include "hittable.h"
 #include "material.h"
+#include <chrono>
+#include <atomic>
+#include <vector>
+#include <iomanip>
 
 class camera {
   public:
@@ -21,22 +25,42 @@ class camera {
     
     void render(const hittable& world) {
         initialize();
+        auto start = std::chrono::high_resolution_clock::now();
 
-        std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
+        // 1. Create a buffer to hold the image in memory
+        std::vector<color> image_data(image_width * image_height);
+        std::atomic<int> completed_lines(0);
 
+        // 2. Parallel Loop
+        #pragma omp parallel for schedule(dynamic)
         for (int j = 0; j < image_height; j++) {
-            std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
             for (int i = 0; i < image_width; i++) {
                 color pixel_color(0,0,0);
                 for (int sample = 0; sample < samples_per_pixel; sample++) {
                     ray r = get_ray(i, j);
                     pixel_color += ray_color(r, max_depth, world);
                 }
-                write_color(std::cout, pixel_samples_scale * pixel_color);
+                // Store results in the buffer instead of printing immediately
+                image_data[j * image_width + i] = pixel_samples_scale * pixel_color;
+            }
+
+            // Progress Bar
+            int progress = ++completed_lines;
+            if (progress % 10 == 0 || progress == image_height) {
+                float percent = (float)progress / image_height * 100.0f;
+                std::clog << "\rProgress: [" << std::fixed << std::setprecision(1) << percent << "%] " << std::flush;
             }
         }
 
-        std::clog << "\rDone.                 \n";
+        // 3. Write the PPM header and buffer to std::cout (redirected to i.ppm)
+        std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
+        for (const auto& pixel : image_data) {
+            write_color(std::cout, pixel);
+        }
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = stop - start;
+        std::clog << "\nDone. Render time: " << elapsed.count() << "s\n";
     }
 
   private:

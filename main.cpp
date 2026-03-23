@@ -102,9 +102,9 @@ int main() {
     auto mesh_mat_low  = make_shared<lambertian>(color(0.2, 0.2, 0.8)); // Blue for LOD2
 
     // 2. Load the three individual meshes
-    triangle_mesh lod0("models/bunnyLOD1.obj", mesh_mat_high);
-    triangle_mesh lod1("models/bunnyLOD2.obj", mesh_mat_med);
-    triangle_mesh lod2("models/bunnyLOD3.obj", mesh_mat_low);
+    triangle_mesh lod0("models/StanfordDragonLOD1.obj", mesh_mat_high);
+    triangle_mesh lod1("models/StanfordDragonLOD2.obj", mesh_mat_med, 100.0);
+    triangle_mesh lod2("models/StanfordDragonLOD3.obj", mesh_mat_low, 100.0);
 
     // 1. Build your three separate trees directly
     auto bvh_high = make_shared<bvh_node>(lod0.get_triangles());
@@ -112,14 +112,15 @@ int main() {
     auto bvh_low  = make_shared<bvh_node>(lod2.get_triangles());
 
     // 2. Lock your camera coordinates into variables
-    point3 target_cam_pos = point3(13, 2, 3);
-    point3 target_look_at = point3(0, 0, 0);
+    point3 target_cam_pos = point3(75, 175, 250);
+    point3 target_look_at = point3(0, 30, 0);
 
     // 3. Build the screen mask (3 degree inner, 7 degree outer)
     auto screen_mask = make_shared<bvh_screen_mask>(
-        bvh_high, bvh_med, bvh_low, target_cam_pos, target_look_at, 3.0, 7.0 
+        bvh_high, bvh_med, bvh_low, target_cam_pos, target_look_at, 0.0, 0.0
     );
     world.add(screen_mask);
+    // world.add(bvh_low);
 
     // 4. Set up the camera
     camera cam;
@@ -128,7 +129,7 @@ int main() {
     cam.samples_per_pixel = 50;
     cam.max_depth         = 5;
 
-    cam.vfov     = 20;
+    cam.vfov     = 10;
     cam.lookfrom = target_cam_pos; // Must perfectly match the mask!
     cam.lookat   = target_look_at; // Must perfectly match the mask!
     cam.vup      = vec3(0, 1, 0);

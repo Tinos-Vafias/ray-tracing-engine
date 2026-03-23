@@ -12,7 +12,7 @@
 
 class triangle_mesh {
   public:
-    triangle_mesh(const char* filepath, shared_ptr<material> mat) {
+        triangle_mesh(const char* filepath, shared_ptr<material> mat, double scale = 1.0, vec3 offset = vec3(0,0,0)) {
         std::string inputfile = filepath;
         
         // Find base path for MTL files
@@ -38,28 +38,26 @@ class triangle_mesh {
         // Loop over shapes in the OBJ file
         for (size_t s = 0; s < shapes.size(); s++) {
             size_t index_offset = 0;
-            // Loop over faces (triangles)
             for (size_t f = 0; f < shapes[s].mesh.num_face_vertices.size(); f++) {
                 int fv = shapes[s].mesh.num_face_vertices[f];
 
-                // Ensure the face is a triangle
                 if (fv == 3) {
                     point3 vertices[3];
                     for (size_t v = 0; v < 3; v++) {
                         tinyobj::index_t idx = shapes[s].mesh.indices[index_offset + v];
+                        
+                        // 2. Multiply the raw data by our scale, and add the offset!
                         vertices[v] = point3(
-                            attributes.vertices[3 * idx.vertex_index + 0],
-                            attributes.vertices[3 * idx.vertex_index + 1],
-                            attributes.vertices[3 * idx.vertex_index + 2]
+                            (attributes.vertices[3 * idx.vertex_index + 0] * scale) + offset.x(),
+                            (attributes.vertices[3 * idx.vertex_index + 1] * scale) + offset.y(),
+                            (attributes.vertices[3 * idx.vertex_index + 2] * scale) + offset.z()
                         );
                     }
-                    // Create your triangle object and add to the mesh list
                     mesh_tris.add(make_shared<triangle>(vertices[0], vertices[1], vertices[2], mat));
                 }
                 index_offset += fv;
             }
         }
-        // comment this to run the ppm file (it won't read with these coutput lines)
         std::cout << "> Successfully loaded " << inputfile << " with " << mesh_tris.objects.size() << " triangles.\n";
     }
 
